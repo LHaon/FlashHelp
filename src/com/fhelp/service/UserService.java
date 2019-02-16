@@ -1,12 +1,13 @@
-package com.fhelp.dao;
+package com.fhelp.service;
 
 import com.fhelp.base.User;
 
 /**
- * 用户操作数据库的方法
+ * 逻辑层操作
+ * @author Fan
  *
  */
-public interface UserDao {
+public interface UserService {
 	/**
 	 * 登录
 	 */
@@ -23,6 +24,4 @@ public interface UserDao {
 	 * @return
 	 */
 	boolean register(User user);
-	
-	
 }

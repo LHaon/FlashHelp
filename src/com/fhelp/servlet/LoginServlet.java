@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fhelp.base.User;
 import com.fhelp.dao.UserDao;
-import com.fhelp.impl.UserDaoImpl;
+import com.fhelp.dao.impl.UserDaoImpl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

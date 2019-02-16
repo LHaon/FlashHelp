@@ -1,10 +1,12 @@
-﻿package com.fhelp.impl;
+﻿package com.fhelp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.apache.commons.dbutils.QueryRunner;
 
 import com.fhelp.base.User;
 import com.fhelp.dao.UserDao;
@@ -74,6 +76,20 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	@Override
+	public boolean register(User user) {
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		String sql = "insert into user_tb set userid=?,username=?,password=?,autograph=?,registertime=?";
+		int num = 0;
+		try {
+			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
+					user.getRegistertime());//执行插入语句
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num >= 1 ? true : false;
 	}
 
 }

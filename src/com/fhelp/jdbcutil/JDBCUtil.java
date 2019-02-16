@@ -1,4 +1,4 @@
-﻿package com.fhelp.jdbcutil;
+package com.fhelp.jdbcutil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * JDBC工具类
@@ -20,7 +24,12 @@ public class JDBCUtil {
 	static String name = null;
 	static String password = null;
 
+	// 数据库连接池
+	static ComboPooledDataSource dataSource;
+	
 	static {
+		// 创建数据库连接池对象
+		dataSource = new ComboPooledDataSource();
 		// 创建属性配置对象
 		Properties properties = new Properties();
 		// 使用类加载器，去读取src底下的资源文件
@@ -39,7 +48,15 @@ public class JDBCUtil {
 		password = properties.getProperty("password");
 
 	}
-
+	
+	/**
+	 * 获取数据库连接池对象
+	 * @return
+	 */
+	public static DataSource getDataSource() {
+		return dataSource;
+	}
+	
 	/**
 	 * 获取连接对象
 	 * 
