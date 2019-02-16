@@ -40,20 +40,20 @@ public class LoginServlet extends HttpServlet {
 		username = request.getParameter("username");
 		password = request.getParameter("password");
 
+		User user = new User();
 		boolean flag = service.login(username, password);
 		if (flag) {
 			// 用户部分信息
-			User user = service.findUser(username);
+			user = service.findUser(username);
 			// 用户所有的信息
 			// service.findAllMsg(user, user.getUserId());
 			base.setCode(200);
 			base.setMsg("登录成功！");
-			base.setData(user);
 		} else {
 			base.setCode(404);
 			base.setMsg("账号或者密码不正确！");
 		}
-
+		base.setData(user);
 		response.getWriter().println(gson.toJson(base));
 	}
 
