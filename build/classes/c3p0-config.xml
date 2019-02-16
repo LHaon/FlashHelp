@@ -16,6 +16,7 @@
 		<property name="maxStatements">200</property>
 
 		<user-overrides user="test-user">
+		
 			<property name="maxPoolSize">10</property>
 			<property name="minPoolSize">1</property>
 			<property name="maxStatements">0</property>
