@@ -22,7 +22,7 @@ import com.fhelp.jdbcutil.JDBCUtil;
  */
 public class UserDaoImpl implements UserDao {
 
-	Connection con = JDBCUtil.getConnection();
+	Connection con = null;
 	Statement st = null;
 	ResultSet rs = null;
 	String sql = null;
@@ -32,17 +32,10 @@ public class UserDaoImpl implements UserDao {
 	public boolean login(String username, String password) {
 		boolean flag = false;
 		try {
+			con = JDBCUtil.getConnection();
 			st = con.createStatement();
-		} catch (SQLException e) {
-			System.out.println("获取数据库操作对象失败");
-		}
-		sql = "select * from user_tb";
-		try {
+			sql = "select * from user_tb";
 			rs = st.executeQuery(sql);
-		} catch (SQLException e) {
-			System.out.println("获取结果集失败");
-		}
-		try {
 			while (rs.next()) {
 				String uName = rs.getString("username");
 				String uPassword = rs.getString("password");
@@ -52,9 +45,8 @@ public class UserDaoImpl implements UserDao {
 					break;
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("数据库操作失败");
 		}
 		return flag;
 	}
@@ -64,6 +56,7 @@ public class UserDaoImpl implements UserDao {
 		User user = null;
 		sql = "select * from user_tb where username=?";
 		try {
+			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			rs = ps.executeQuery();

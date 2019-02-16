@@ -19,63 +19,29 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  */
 public class JDBCUtil {
 
-	static String driverClass = null;
-	static String url = null;
-	static String name = null;
-	static String password = null;
-
 	// 数据库连接池
-	static ComboPooledDataSource dataSource;
-	
+	static ComboPooledDataSource dataSource = null;
 	static {
-		// 创建数据库连接池对象
 		dataSource = new ComboPooledDataSource();
-		// 创建属性配置对象
-		Properties properties = new Properties();
-		// 使用类加载器，去读取src底下的资源文件
-		InputStream is = JDBCUtil.class.getClassLoader().getResourceAsStream("jdbc.properties");
-		try {
-			// 导入输入流
-			properties.load(is);
-		} catch (IOException e) {
-			System.out.println("获取输入流失败");
-		}
-
-		// 读取属性
-		driverClass = properties.getProperty("driverClass");
-		url = properties.getProperty("url");
-		name = properties.getProperty("name");
-		password = properties.getProperty("password");
-
 	}
-	
+
 	/**
 	 * 获取数据库连接池对象
+	 * 
 	 * @return
 	 */
 	public static DataSource getDataSource() {
 		return dataSource;
 	}
-	
+
 	/**
 	 * 获取连接对象
 	 * 
 	 * @return
+	 * @throws SQLException
 	 */
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			try {
-				Class.forName(driverClass);
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			con = DriverManager.getConnection(url, name, password);
-		} catch (SQLException e) {
-			System.out.println("连接失败");
-		}
-		return con;
+	public static Connection getConnection() throws SQLException {
+		return dataSource.getConnection();
 	}
 
 	/**
