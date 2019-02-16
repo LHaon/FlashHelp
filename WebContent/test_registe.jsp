@@ -16,7 +16,7 @@
 				<input type="reset" value="重置" /> -->
 		<tr>
 			<td>账号：</td>
-			<td><input type="text" name="username" /></td>
+			<td><input type="text" name="account" /></td>
 		</tr>
 		<tr>
 			<td>密码：</td>

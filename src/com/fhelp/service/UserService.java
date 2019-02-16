@@ -1,5 +1,9 @@
 package com.fhelp.service;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import com.fhelp.base.Task;
 import com.fhelp.base.User;
 
 /**
@@ -34,4 +38,18 @@ public interface UserService {
 	 * @param id
 	 */
 	void findAllMsg(User user, int id);
+	
+	/**
+	 * 查询最后一条记录
+	 * @return
+	 * @throws SQLException 
+	 */
+	User getLastUser() throws SQLException;
+	
+	/**
+	 * 按类型查看任务列表
+	 * @param taskType
+	 * @return
+	 */
+	List<Task> getTask(String taskType);
 }

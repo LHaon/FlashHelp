@@ -29,4 +29,14 @@
     <servlet-name>RegisteServlet</servlet-name>
     <url-pattern>/RegisteServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowTaskServlet</display-name>
+    <servlet-name>ShowTaskServlet</servlet-name>
+    <servlet-class>com.fhelp.servlet.ShowTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowTaskServlet</servlet-name>
+    <url-pattern>/ShowTaskServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

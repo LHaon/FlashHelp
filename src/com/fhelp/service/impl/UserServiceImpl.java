@@ -1,5 +1,9 @@
 package com.fhelp.service.impl;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import com.fhelp.base.Task;
 import com.fhelp.base.User;
 import com.fhelp.dao.UserDao;
 import com.fhelp.dao.impl.UserDaoImpl;
@@ -29,6 +33,18 @@ public class UserServiceImpl implements UserService {
 	public void findAllMsg(User user, int id) {
 		UserDao dao = new UserDaoImpl();
 		dao.findAllMsg(user, id);
+	}
+
+	@Override
+	public User getLastUser() throws SQLException {
+		UserDao dao = new UserDaoImpl();
+		return dao.getLastUser();
+	}
+
+	@Override
+	public List<Task> getTask(String taskType) {
+		UserDao dao = new UserDaoImpl();
+		return dao.getTask(taskType);
 	}
 
 }

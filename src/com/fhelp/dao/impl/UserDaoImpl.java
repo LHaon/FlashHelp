@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import com.fhelp.base.Task;
 import com.fhelp.base.User;
 import com.fhelp.dao.UserDao;
 import com.fhelp.jdbcutil.JDBCUtil;
@@ -57,13 +61,14 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUser(String name) {
-		User user = new User();
+		User user = null;
 		sql = "select * from user_tb where username=?";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			if (rs.next()) {
+				user = new User();
 				user.setUserId(rs.getInt("userid"));
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
@@ -93,8 +98,11 @@ public class UserDaoImpl implements UserDao {
 		String sql = "insert into user_tb set userid=?,username=?,password=?,autograph=?,registertime=?";
 		int num = 0;
 		try {
-			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
+			num = runner.update(sql, null, user.getUsername(), user.getPassword(), user.getAutograph(),
 					user.getRegistertime());// 执行插入语句
+			// 在个人信息表中同步增加该用户的昵称信息
+			runner.update("insert into selfinfo_tb set userid=?,nikename=?", user.getUserId(), user.getNikename());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +111,55 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void findAllMsg(User user, int id) {
-		// 查找用户的所有信息
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public User getLastUser() throws SQLException {
+		String sql = "select * from user_tb order by userid DESC limit 1";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		return runner.query(sql, new BeanHandler<User>(User.class));
+	}
+
+	@Override
+	public List<Task> getTask(String taskType) {
+		List<Task> list = null;
+		String sql = "select * from task_tb where 1=1 and";
+		// all,onlymoney,onlyint,onlyfree,neartask,newtask,hightask
+		switch (taskType) {
+		case "onlymoney":
+			// 只看现金
+			sql = "remunertype = 1 ORDER BY remuneration";
+			break;
+		case "onlyint":
+			// 只看积分
+			sql = "remunertype = 2 ORDER BY remuneration";
+			break;
+		case "onlyfree":
+			// 只看免费
+			sql = "remuneration = 0";
+			break;
+		case "neartask":
+			// 距离最近
+			sql = "1=1 ORDER BY loc";
+			break;
+		case "newtask":
+			// 最新发布
+			sql = "1=1 ORDER BY starttime DESC";
+			break;
+		case "hightask":
+			// 悬赏最高
+			sql = "1=1 ORDER BY remuneration DESC";
+			break;
+		}
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		try {
+			list = runner.query(sql, new BeanListHandler<Task>(Task.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
