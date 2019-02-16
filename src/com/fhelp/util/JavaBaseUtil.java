@@ -1,7 +1,5 @@
 package com.fhelp.util;
 
-import com.fhelp.base.PswType;
-
 public class JavaBaseUtil {
 
 	/**
