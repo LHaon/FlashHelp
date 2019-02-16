@@ -5,7 +5,7 @@ import com.fhelp.dao.UserDao;
 import com.fhelp.dao.impl.UserDaoImpl;
 import com.fhelp.service.UserService;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean login(String username, String password) {
@@ -24,5 +24,11 @@ public class UserServiceImpl implements UserService{
 		UserDao dao = new UserDaoImpl();
 		return dao.register(user);
 	}
-	
+
+	@Override
+	public void findAllMsg(User user, int id) {
+		UserDao dao = new UserDaoImpl();
+		dao.findAllMsg(user, id);
+	}
+
 }

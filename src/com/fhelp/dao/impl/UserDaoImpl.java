@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 		} catch (SQLException e) {
 			System.out.println("获取数据库操作对象失败");
 		}
-		sql = "" + "select * from user_tb";
+		sql = "select * from user_tb";
 		try {
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
@@ -57,20 +57,29 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUser(String name) {
-		User user = null;
+		User user = new User();
 		sql = "select * from user_tb where username=?";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				int userId = rs.getInt("userid");
-				String username = rs.getString("username");// 账号
-				String password = rs.getString("password");// 密码
-				int credit = rs.getInt("credit");// 信誉度
-				double balance = rs.getDouble("balance");
-				double integral = rs.getDouble("integral");
-				user = new User(userId, username, password, credit, balance, integral);
+				user.setUserId(rs.getInt("userid"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setAutograph(rs.getString("autograph"));
+				user.setRegistertime(rs.getTime("registertime"));
+				user.setIsRealName(rs.getInt("isrealname"));
+				user.setCredit(rs.getInt("credit"));
+				user.setFollow(rs.getString("follow"));
+				user.setFans(rs.getString("fans"));
+				user.setBalance(rs.getDouble("balance"));
+				user.setIntegral(rs.getDouble("integral"));
+				user.setRelease(rs.getString("release"));
+				user.setAccept(rs.getString("accept"));
+				user.setColection(rs.getString("collection"));
+				user.setFinish(rs.getString("finish"));
+				user.setOfftenTask(rs.getString("offtentask"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,11 +94,16 @@ public class UserDaoImpl implements UserDao {
 		int num = 0;
 		try {
 			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
-					user.getRegistertime());//执行插入语句
+					user.getRegistertime());// 执行插入语句
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return num >= 1 ? true : false;
+	}
+
+	@Override
+	public void findAllMsg(User user, int id) {
+		// 查找用户的所有信息
 	}
 
 }

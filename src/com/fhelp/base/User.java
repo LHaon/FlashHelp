@@ -7,37 +7,40 @@ import java.util.Date;
  *
  */
 public class User {
-	private int userId;//用户id
-	private String username;//用户名
-	private String password;//用户密码
-	private String autograph;//签名
-	private Date registertime;//注册时间
-	private int isRealName;//实名
-	private int credit;//信誉度
-	private String follow;//关注的人
-	private String fans;//粉丝
-	private double balance;//余额
-	private double integral;//积分
-	private String release;//发布列表
-	private String accept;//接受列表
-	private String colection;//收藏列表
-	private String finish;//完成列表
-	private String offtenTask;//常接任务列表
-	
+	private int userId;// 用户id
+	private String username;// 用户名
+	private String password;// 用户密码
+	private String autograph;// 签名
+	private Date registertime;// 注册时间
+	private int isRealName;// 实名
+	private int credit;// 信誉度
+	private String follow;// 关注的人
+	private String fans;// 粉丝
+	private double balance;// 余额
+	private double integral;// 积分
+	private String release;// 发布列表
+	private String accept;// 接受列表
+	private String colection;// 收藏列表
+	private String finish;// 完成列表
+	private String offtenTask;// 常接任务列表
+	private String nikename;// 昵称
+	// 头像
+	private int sex;// 性别
+	private String location;// 位置
+
 	public User() {
-		
+
 	}
-	
+
 	public User(int userId, String username, String password, int credit, double balance, double integral) {
-		this.setUserId(userId);
+		this.userId = userId;
 		this.username = username;
-		this.setPassword(password);
+		this.password = password;
 		this.credit = credit;
-		this.setBalance(balance);
-		this.setIntegral(integral);
+		this.balance = balance;
+		this.integral = integral;
 	}
-	
-	
+
 	public User(String username, String password, String autograph, Date registertime) {
 		super();
 		this.username = username;
@@ -173,5 +176,29 @@ public class User {
 	public void setOfftenTask(String offtenTask) {
 		this.offtenTask = offtenTask;
 	}
-	
+
+	public String getNikename() {
+		return nikename;
+	}
+
+	public void setNikename(String nikename) {
+		this.nikename = nikename;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
 }
