@@ -3,13 +3,13 @@ package com.fhelp.util;
 public class JavaBaseUtil {
 
 	/**
-	 * 检测用户名是否合法 用户名格式：只能是以字母开头(不区分大小写)、5-10位、不包含特殊符号（、_.%$#@!空格)
+	 * 检测用户名是否合法 用户名格式：4-16位 (字母，数字，汉字，下划线，减号)，不能含有空格！
 	 * 
 	 * @param username
 	 * @return
 	 */
 	public static boolean checkUsername(String username) {
-		if (username.matches("^[a-zA-Z]\\w{4,9}$") && !username.contains(" ")) {
+		if (username.matches("^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{4,16}$") && !username.contains(" ")) {
 			return true;
 		}
 		return false;

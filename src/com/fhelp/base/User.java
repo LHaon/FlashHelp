@@ -159,6 +159,7 @@ public class User {
 	public void setOfftenTask(String offtenTask) {
 		this.offtenTask = offtenTask;
 	}
+	
 
 	public String getNikename() {
 		return nikename;

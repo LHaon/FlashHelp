@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUser(String name) throws SQLException {
-		sql = "select distinct * from user_tb,selfinfo_tb where username=?";
+		sql = "select * from user_tb A JOIN selfinfo_tb B ON A.userid=B.userid where A.username=?";
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		return runner.query(sql, new BeanHandler<User>(User.class), name);
 	}

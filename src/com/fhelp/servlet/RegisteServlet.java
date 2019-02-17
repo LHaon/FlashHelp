@@ -17,6 +17,7 @@ import com.fhelp.service.UserService;
 import com.fhelp.service.impl.UserServiceImpl;
 import com.fhelp.util.JavaBaseUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 注册Servlet
@@ -36,12 +37,18 @@ public class RegisteServlet extends HttpServlet {
 		// String psw_comfirm = request.getParameter("psw_comfirm");
 
 		// 2.判断数据是否是有效的并将结果返回给客户端
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().serializeNulls().create();
 		BaseBean base = new BaseBean();
 		UserService service = new UserServiceImpl();
 		User user = new User();
 		// TODO 这个地方要改 应该从个人资料表里面去查重
-		if (service.getUserByNikeName(account) != null) {
+		User uu = null;
+		try {
+			uu = service.findUser(account);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		if (uu!= null) {
 			// 当前用户已经被注册
 			base.setCode(101);
 			base.setMsg("该账号已经被注册！");
@@ -53,7 +60,7 @@ public class RegisteServlet extends HttpServlet {
 			// base.setData(user);
 		} else if (!JavaBaseUtil.checkUsername(account)) {
 			base.setCode(103);
-			base.setMsg("只能是以字母开头(不区分大小写)、5-10位、不包含特殊符号（、_.%$#@!)和空格");
+			base.setMsg("4-16位 (字母，数字，汉字，下划线，减号)，不能含有空格！");
 			base.setData(user);
 		} else if (!JavaBaseUtil.checkPassword(password)) {
 			base.setCode(104);
@@ -71,8 +78,8 @@ public class RegisteServlet extends HttpServlet {
 			int last_user_id = u == null ? 0 : u.getUserId();
 			base.setCode(200);
 			base.setMsg("注册成功");
-			user.setNikename(account);
-			user.setUsername("help_" + UUID.randomUUID().toString().split("-")[0] + (last_user_id + 1));
+			user.setUsername(account);
+			user.setNikename("help_" + UUID.randomUUID().toString().split("-")[0] + (last_user_id + 1));
 			user.setPassword(password);
 			user.setUserId(last_user_id + 1);
 			Date date = new Date(System.currentTimeMillis());
