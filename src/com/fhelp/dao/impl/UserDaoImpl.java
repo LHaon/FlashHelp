@@ -34,6 +34,8 @@ public class UserDaoImpl implements UserDao {
 		sql = "select password from user_tb where username=?";
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		User user = runner.query(sql, new BeanHandler<User>(User.class), username);
+		if (user == null)
+			return false;
 		return user.getPassword().equals(password);
 	}
 
