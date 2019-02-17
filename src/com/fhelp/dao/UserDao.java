@@ -14,12 +14,12 @@ public interface UserDao {
 	/**
 	 * 登录
 	 */
-	boolean login(String username, String password);
+	boolean login(String username, String password) throws SQLException;
 
 	/**
 	 * 查找用户信息
 	 */
-	User findUser(String neme);
+	User findUser(String neme) throws SQLException;
 
 	/**
 	 * 用户注册
@@ -29,15 +29,6 @@ public interface UserDao {
 	 */
 	boolean register(User user);
 
-	/**
-	 * 查找用户所有信息
-	 * 
-	 * @param user
-	 * @param id
-	 * @return
-	 */
-	void findAllMsg(User user, int id);
-	
 	/**
 	 * 查询最后一条记录
 	 * @return

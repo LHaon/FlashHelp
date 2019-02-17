@@ -1,6 +1,7 @@
 package com.fhelp.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,10 +42,20 @@ public class LoginServlet extends HttpServlet {
 		password = request.getParameter("password");
 
 		User user = new User();
-		boolean flag = service.login(username, password);
+		boolean flag = false;
+		try {
+			flag = service.login(username, password);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		if (flag) {
 			// 用户部分信息
-			user = service.findUser(username);
+			try {
+				user = service.findUser(username);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// 用户所有的信息
 			// service.findAllMsg(user, user.getUserId());
 			base.setCode(200);

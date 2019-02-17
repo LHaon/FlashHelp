@@ -35,16 +35,6 @@ public class JDBCUtil {
 	}
 
 	/**
-	 * 获取连接对象
-	 * 
-	 * @return
-	 * @throws SQLException
-	 */
-	public static Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
-	}
-
-	/**
 	 * 释放资源
 	 * 
 	 * @param con

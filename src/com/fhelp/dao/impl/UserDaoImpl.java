@@ -15,6 +15,7 @@ import com.fhelp.base.Task;
 import com.fhelp.base.User;
 import com.fhelp.dao.UserDao;
 import com.fhelp.jdbcutil.JDBCUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * 用户操作数据库的实现类
@@ -29,60 +30,18 @@ public class UserDaoImpl implements UserDao {
 	PreparedStatement ps = null;
 
 	@Override
-	public boolean login(String username, String password) {
-		boolean flag = false;
-		try {
-			con = JDBCUtil.getConnection();
-			st = con.createStatement();
-			sql = "select * from user_tb";
-			rs = st.executeQuery(sql);
-			while (rs.next()) {
-				String uName = rs.getString("username");
-				String uPassword = rs.getString("password");
-				if (username.equals(uName) && password.equals(uPassword)) {
-					System.out.println("登录成功");
-					flag = true;
-					break;
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("数据库操作失败");
-		}
-		return flag;
+	public boolean login(String username, String password) throws SQLException {
+		sql = "select password from user_tb where username=?";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		User user = runner.query(sql, new BeanHandler<User>(User.class), username);
+		return user.getPassword().equals(password);
 	}
 
 	@Override
-	public User findUser(String name) {
-		User user = null;
-		sql = "select * from user_tb where username=?";
-		try {
-			con = JDBCUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setString(1, name);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				user = new User();
-				user.setUserId(rs.getInt("userid"));
-				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("password"));
-				user.setAutograph(rs.getString("autograph"));
-				user.setRegistertime(rs.getTime("registertime"));
-				user.setIsRealName(rs.getInt("isrealname"));
-				user.setCredit(rs.getInt("credit"));
-				user.setFollow(rs.getString("follow"));
-				user.setFans(rs.getString("fans"));
-				user.setBalance(rs.getDouble("balance"));
-				user.setIntegral(rs.getDouble("integral"));
-				user.setRelease(rs.getString("release"));
-				user.setAccept(rs.getString("accept"));
-				user.setColection(rs.getString("collection"));
-				user.setFinish(rs.getString("finish"));
-				user.setOfftenTask(rs.getString("offtentask"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user;
+	public User findUser(String name) throws SQLException {
+		sql = "select distinct * from user_tb,selfinfo_tb where username=?";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		return runner.query(sql, new BeanHandler<User>(User.class), name);
 	}
 
 	@Override
@@ -100,12 +59,6 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return num >= 1 ? true : false;
-	}
-
-	@Override
-	public void findAllMsg(User user, int id) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

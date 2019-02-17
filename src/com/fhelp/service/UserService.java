@@ -16,12 +16,12 @@ public interface UserService {
 	/**
 	 * 登录
 	 */
-	boolean login(String username, String password);
+	boolean login(String username, String password) throws SQLException;
 
 	/**
 	 * 查找用户信息
 	 */
-	User findUser(String neme);
+	User findUser(String neme) throws SQLException;
 
 	/**
 	 * 用户注册
@@ -31,23 +31,18 @@ public interface UserService {
 	 */
 	boolean register(User user);
 
-	/**
-	 * 查找用户所有信息
-	 * 
-	 * @param user
-	 * @param id
-	 */
-	void findAllMsg(User user, int id);
-	
+
 	/**
 	 * 查询最后一条记录
+	 * 
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	User getLastUser() throws SQLException;
-	
+
 	/**
 	 * 按类型查看任务列表
+	 * 
 	 * @param taskType
 	 * @return
 	 */

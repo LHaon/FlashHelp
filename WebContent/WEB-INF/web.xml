@@ -39,4 +39,14 @@
     <servlet-name>ShowTaskServlet</servlet-name>
     <url-pattern>/ShowTaskServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SendTaskServlet</display-name>
+    <servlet-name>SendTaskServlet</servlet-name>
+    <servlet-class>com.fhelp.servlet.SendTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendTaskServlet</servlet-name>
+    <url-pattern>/SendTaskServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -12,13 +12,13 @@ import com.fhelp.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public boolean login(String username, String password) {
+	public boolean login(String username, String password) throws SQLException {
 		UserDao dao = new UserDaoImpl();
 		return dao.login(username, password);
 	}
 
 	@Override
-	public User findUser(String neme) {
+	public User findUser(String neme) throws SQLException {
 		UserDao dao = new UserDaoImpl();
 		return dao.findUser(neme);
 	}
@@ -29,11 +29,6 @@ public class UserServiceImpl implements UserService {
 		return dao.register(user);
 	}
 
-	@Override
-	public void findAllMsg(User user, int id) {
-		UserDao dao = new UserDaoImpl();
-		dao.findAllMsg(user, id);
-	}
 
 	@Override
 	public User getLastUser() throws SQLException {
