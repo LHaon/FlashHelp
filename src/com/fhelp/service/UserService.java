@@ -23,7 +23,13 @@ public interface UserService {
 	 */
 	User findUser(String neme) throws SQLException;
 
-
+	/**
+	 * 根据用户id来查找用户
+	 * @param userid
+	 * @return
+	 */
+	User getUserById(int userid);
+	
 	/**
 	 * 通过昵称来查找用户
 	 * @param nikeName

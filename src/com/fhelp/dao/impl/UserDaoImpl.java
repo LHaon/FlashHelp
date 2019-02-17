@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUser(String name) throws SQLException {
-		sql = "select distinct * from user_tb,selfinfo_tb where username=?";
+		sql = "SELECT DISTINCT * FROM user_tb A JOIN selfinfo_tb B ON A.userid = B.userid where username = ?";
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		return runner.query(sql, new BeanHandler<User>(User.class), name);
 	}
@@ -127,7 +127,20 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByNikeName(String nikeName) {
-		sql = "selcet * from selfinfo_tb where nikename = ?";
+		sql = "SELECT DISTINCT * FROM user_tb A JOIN selfinfo_tb B ON A.userid = B.userid WHERE nikename=?";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		User user = null;
+		try {
+			user = runner.query(sql, new BeanHandler<User>(User.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public User getUserById(int userid) {
+		sql = "SELECT DISTINCT * FROM user_tb A JOIN selfinfo_tb B ON A.userid = B.userid WHERE A.userid=?";
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		User user = null;
 		try {
