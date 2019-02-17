@@ -20,6 +20,13 @@ public interface UserDao {
 	 * 查找用户信息
 	 */
 	User findUser(String neme) throws SQLException;
+	
+	/**
+	 * 通过昵称来查找用户
+	 * @param nikeName
+	 * @return
+	 */
+	User getUserByNikeName(String nikeName);
 
 	/**
 	 * 用户注册

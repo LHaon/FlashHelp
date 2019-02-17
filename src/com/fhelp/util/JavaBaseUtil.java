@@ -33,7 +33,7 @@ public class JavaBaseUtil {
 		// 2.判断是否有字母
 		word = password.matches("^.*[a-zA-Z]+.*$");
 		// 3.判断是否有特殊符号
-		symbol = password.matches(".*[~!@#$%^&*()_+|<>,.?/:;'\\[\\]{}\"]+.*");
+		symbol = password.matches(".*[~!@#$%^&*()_+|<>,.?/;'\\[\\]{}\"]+.*");
 		int len = arr.length;
 		// 4.判断长度是否为6-16
 		l = (len >= 6 && len <= 16) ? true : false;

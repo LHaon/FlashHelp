@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 	Connection con = null;
 	Statement st = null;
 	ResultSet rs = null;
-	String sql = null;
+	String sql = "";
 	PreparedStatement ps = null;
 
 	@Override
@@ -45,6 +45,7 @@ public class UserDaoImpl implements UserDao {
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		return runner.query(sql, new BeanHandler<User>(User.class), name);
 	}
+	
 
 	@Override
 	public boolean register(User user) {
@@ -122,6 +123,19 @@ public class UserDaoImpl implements UserDao {
 			System.out.println("发布任务失败");
 		}
 		return num >= 1 ? true : false;
+	}
+
+	@Override
+	public User getUserByNikeName(String nikeName) {
+		sql = "selcet * from selfinfo_tb where nikename = ?";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		User user = null;
+		try {
+			user = runner.query(sql, new BeanHandler<User>(User.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 }

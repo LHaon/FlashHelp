@@ -47,4 +47,10 @@ public class UserServiceImpl implements UserService {
 		return dao.sendTask(task);
 	}
 
+	@Override
+	public User getUserByNikeName(String nikeName) {
+		UserDao dao = new UserDaoImpl();
+		return dao.getUserByNikeName(nikeName);
+	}
+
 }
