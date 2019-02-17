@@ -27,13 +27,6 @@ public interface UserDao {
 	 * @return
 	 */
 	User getUserByNikeName(String nikeName);
-	
-	/**
-	 * 根据用户id来查找用户
-	 * @param userid
-	 * @return
-	 */
-	User getUserById(int userid);
 
 	/**
 	 * 用户注册

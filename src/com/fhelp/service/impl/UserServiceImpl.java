@@ -53,10 +53,4 @@ public class UserServiceImpl implements UserService {
 		return dao.getUserByNikeName(nikeName);
 	}
 
-	@Override
-	public User getUserById(int userid) {
-		UserDao dao = new UserDaoImpl();
-		return dao.getUserById(userid);
-	}
-
 }
