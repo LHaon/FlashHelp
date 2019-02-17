@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
 		return dao.register(user);
 	}
 
-
 	@Override
 	public User getLastUser() throws SQLException {
 		UserDao dao = new UserDaoImpl();
@@ -40,6 +39,12 @@ public class UserServiceImpl implements UserService {
 	public List<Task> getTask(String taskType) {
 		UserDao dao = new UserDaoImpl();
 		return dao.getTask(taskType);
+	}
+
+	@Override
+	public boolean sendTask(Task task) {
+		UserDao dao = new UserDaoImpl();
+		return dao.sendTask(task);
 	}
 
 }

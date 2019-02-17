@@ -31,16 +31,25 @@ public interface UserDao {
 
 	/**
 	 * 查询最后一条记录
+	 * 
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	User getLastUser() throws SQLException;
-	
+
 	/**
 	 * 按类型查看任务列表
+	 * 
 	 * @param taskType
 	 * @return
 	 */
 	List<Task> getTask(String taskType);
+
+	/**
+	 * 发布任务
+	 * 
+	 * @param task
+	 */
+	boolean sendTask(Task task);
 
 }

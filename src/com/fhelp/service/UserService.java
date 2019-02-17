@@ -31,7 +31,6 @@ public interface UserService {
 	 */
 	boolean register(User user);
 
-
 	/**
 	 * 查询最后一条记录
 	 * 
@@ -47,4 +46,12 @@ public interface UserService {
 	 * @return
 	 */
 	List<Task> getTask(String taskType);
+
+	/**
+	 * 发布任务
+	 * 
+	 * @param task
+	 * @return
+	 */
+	boolean sendTask(Task task);
 }

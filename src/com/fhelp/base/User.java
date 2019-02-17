@@ -24,29 +24,12 @@ public class User {
 	private String finish;// 完成列表
 	private String offtenTask;// 常接任务列表
 	private String nikename;// 昵称
-	// 头像
+	private String photo;// 头像
 	private int sex;// 性别
 	private String location;// 位置
 
 	public User() {
 
-	}
-
-	public User(int userId, String username, String password, int credit, double balance, double integral) {
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-		this.credit = credit;
-		this.balance = balance;
-		this.integral = integral;
-	}
-
-	public User(String username, String password, String autograph, Date registertime) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.autograph = autograph;
-		this.registertime = registertime;
 	}
 
 	public String getUsername() {
@@ -199,6 +182,14 @@ public class User {
 
 	public void setSex(int sex) {
 		this.sex = sex;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }

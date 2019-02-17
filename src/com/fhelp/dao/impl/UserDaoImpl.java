@@ -108,4 +108,18 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
+	// 发布任务未写完
+	@Override
+	public boolean sendTask(Task task) {
+		sql = "insert into task_tb values(?,?,?,?,?)";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		int num = 0;
+		try {
+			num = runner.update(sql, null, task.getUserId());
+		} catch (SQLException e) {
+			System.out.println("发布任务失败");
+		}
+		return num >= 1 ? true : false;
+	}
+
 }
