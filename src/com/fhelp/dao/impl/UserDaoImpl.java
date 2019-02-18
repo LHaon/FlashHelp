@@ -45,7 +45,6 @@ public class UserDaoImpl implements UserDao {
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		return runner.query(sql, new BeanHandler<User>(User.class), name);
 	}
-	
 
 	@Override
 	public boolean register(User user) {
@@ -74,32 +73,35 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<Task> getTask(String taskType) {
 		List<Task> list = null;
-		String sql = "select * from task_tb where 1=1 and";
+		String sql = "select * from task_tb where ";
 		// all,onlymoney,onlyint,onlyfree,neartask,newtask,hightask
 		switch (taskType) {
+		case "all":
+			sql += " 1=1";
+			break;
 		case "onlymoney":
 			// 只看现金
-			sql = "remunertype = 1 ORDER BY remuneration";
+			sql += " remunertype = 1 ORDER BY remuneration";
 			break;
 		case "onlyint":
 			// 只看积分
-			sql = "remunertype = 2 ORDER BY remuneration";
+			sql += " remunertype = 2 ORDER BY remuneration";
 			break;
 		case "onlyfree":
 			// 只看免费
-			sql = "remuneration = 0";
+			sql += " remuneration = 0";
 			break;
 		case "neartask":
 			// 距离最近
-			sql = "1=1 ORDER BY loc";
+			sql += " 1=1 ORDER BY loc";
 			break;
 		case "newtask":
 			// 最新发布
-			sql = "1=1 ORDER BY starttime DESC";
+			sql += " 1=1 ORDER BY starttime DESC";
 			break;
 		case "hightask":
 			// 悬赏最高
-			sql = "1=1 ORDER BY remuneration DESC";
+			sql += " 1=1 ORDER BY remuneration DESC";
 			break;
 		}
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
@@ -127,11 +129,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByNikeName(String nikeName) {
-		sql = "selcet * from selfinfo_tb where nikename = ?";
+		sql = "select * from user_tb A JOIN selfinfo_tb B ON A.userid=B.userid where B.nikename=?";
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
 		User user = null;
 		try {
-			user = runner.query(sql, new BeanHandler<User>(User.class));
+			user = runner.query(sql, new BeanHandler<User>(User.class), nikeName);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public User getUserById(int userid) {
+		sql = "select * from user_tb A JOIN selfinfo_tb B ON A.userid=B.userid where A.userid=?";
+		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
+		User user = null;
+		try {
+			user = runner.query(sql, new BeanHandler<User>(User.class), userid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

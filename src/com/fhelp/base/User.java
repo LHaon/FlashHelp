@@ -192,5 +192,9 @@ public class User {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "userId:"+userId+",photo:"+photo;
+	}
 }

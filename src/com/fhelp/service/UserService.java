@@ -32,6 +32,13 @@ public interface UserService {
 	User getUserByNikeName(String nikeName);
 	
 	/**
+	 * 通过用户id来查找用户
+	 * @param id
+	 * @return
+	 */
+	User getUserById(int userid);
+	
+	/**
 	 * 用户注册
 	 * 
 	 * @param user

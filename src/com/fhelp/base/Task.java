@@ -12,7 +12,7 @@ import java.util.List;
 public class Task {
 	private int taskId;// 任务id
 	private int userId;// 发布此任务的用户
-	private int tyep;// 任务类型
+	private int type;// 任务类型
 	private int state;// 任务状态
 	private int remunertype;// 酬劳类型
 	private double remuneration;// 酬劳
@@ -24,9 +24,9 @@ public class Task {
 	private int upCount;// 点赞数
 	private int collecCount;// 收藏数
 	private int clickCount;// 点击数
-	private List<String> taskPhoto;//任务相关图片
-	private Date startTime;//发布时间
-	
+	private List<String> taskPhoto;// 任务相关图片
+	private Date startTime;// 发布时间
+
 	public Task() {
 		super();
 	}
@@ -47,12 +47,12 @@ public class Task {
 		this.userId = userId;
 	}
 
-	public int getTyep() {
-		return tyep;
+	public int getType() {
+		return type;
 	}
 
-	public void setTyep(int tyep) {
-		this.tyep = tyep;
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public int getState() {
@@ -111,7 +111,6 @@ public class Task {
 		this.loc = loc;
 	}
 
-
 	public int getUpCount() {
 		return upCount;
 	}
@@ -159,6 +158,18 @@ public class Task {
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	
+
+/*	@Override
+	public String toString() {
+		return "taskId:" + taskId + "userId:" + userId + "type:" + type + "state:" + state + "remunertype:"
+				+ remunertype + "remuneration:" + remuneration + "timelimit:" + timelimit + "taskName:" + taskName
+				+ "taskDesc:" + taskDesc + "loc:" + loc + "commentList:" + commentList + "upCount:" + upCount
+				+ "collecCount:" + collecCount + "clickCount:" + clickCount + "taskPhoto:" + taskPhoto + "startTime:"
+				+ startTime;
+	}*/
+	@Override
+	public String toString() {
+		return "taskId:"+taskId+",userId:"+userId;
+	}
 
 }
