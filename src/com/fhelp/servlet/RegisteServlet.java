@@ -48,7 +48,7 @@ public class RegisteServlet extends HttpServlet {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		if (uu!= null) {
+		if (uu != null) {
 			// 当前用户已经被注册
 			base.setCode(101);
 			base.setMsg("该账号已经被注册！");
@@ -84,7 +84,12 @@ public class RegisteServlet extends HttpServlet {
 			user.setUserId(last_user_id + 1);
 			Date date = new Date(System.currentTimeMillis());
 			user.setRegistertime(date);
-			user.setAutograph("这个人是个猪，没写任何东西");
+			user.setAutograph("这个人很懒，什么都没有留下");
+			try {
+				user = service.findUser(user.getUsername());
+			} catch (SQLException e) {
+				System.out.println("无法获取用户");
+			}
 			base.setData(user);
 			// 添加到数据库中
 			service.register(user);

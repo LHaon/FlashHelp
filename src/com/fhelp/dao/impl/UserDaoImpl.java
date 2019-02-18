@@ -49,11 +49,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean register(User user) {
 		QueryRunner runner = new QueryRunner(JDBCUtil.getDataSource());
-		String sql = "insert into user_tb set userid=?,username=?,password=?,autograph=?,registertime=?";
+		String sql = "insert into user_tb set userid=?,username=?,password=?,autograph=?,registertime=?,follow=?,fans=?,release=?,accept=?,collection=?,finish=?,offtentask=?";
 		int num = 0;
 		try {
 			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
-					user.getRegistertime());// 执行插入语句
+					user.getRegistertime(), "0,", "0,", "0,", "0,", "0,", "0,", "0,");// 执行插入语句
 			// 在个人信息表中同步增加该用户的昵称信息
 			runner.update("insert into selfinfo_tb set userid=?,nikename=?", user.getUserId(), user.getNikename());
 
