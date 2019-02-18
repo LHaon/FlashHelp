@@ -84,12 +84,17 @@ public class RegisteServlet extends HttpServlet {
 			user.setUserId(last_user_id + 1);
 			Date date = new Date(System.currentTimeMillis());
 			user.setRegistertime(date);
+			user.setFollow("0");
+			user.setFans("0");
+			user.setSendList("0");
+			user.setAccept("0");
+			user.setColection("0");
+			user.setFinish("0");
+			user.setOfftenTask("0");
+			user.setPhoto("");
+			user.setSex(0);
+			user.setLocation("康定");
 			user.setAutograph("这个人很懒，什么都没有留下");
-			try {
-				user = service.findUser(user.getUsername());
-			} catch (SQLException e) {
-				System.out.println("无法获取用户");
-			}
 			base.setData(user);
 			// 添加到数据库中
 			service.register(user);

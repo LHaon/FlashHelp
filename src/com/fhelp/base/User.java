@@ -18,7 +18,7 @@ public class User {
 	private String fans;// 粉丝
 	private double balance;// 余额
 	private double integral;// 积分
-	private String release;// 发布列表
+	private String sendList;// 发布列表
 	private String accept;// 接受列表
 	private String colection;// 收藏列表
 	private String finish;// 完成列表
@@ -120,12 +120,13 @@ public class User {
 		this.fans = fans;
 	}
 
-	public String getRelease() {
-		return release;
+
+	public String getSendList() {
+		return sendList;
 	}
 
-	public void setRelease(String release) {
-		this.release = release;
+	public void setSendList(String sendList) {
+		this.sendList = sendList;
 	}
 
 	public String getAccept() {
