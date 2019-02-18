@@ -17,6 +17,7 @@ import com.fhelp.dao.impl.UserDaoImpl;
 import com.fhelp.service.UserService;
 import com.fhelp.service.impl.UserServiceImpl;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 /**
@@ -27,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
 	UserService service = new UserServiceImpl();
 	// 数据传输对象
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().serializeNulls().create();
 	BaseBean base = new BaseBean();
 	String username;
 	String password;
