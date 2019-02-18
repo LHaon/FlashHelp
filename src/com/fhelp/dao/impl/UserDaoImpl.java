@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 		String sql = "insert into user_tb set userid=?,username=?,password=?,autograph=?,registertime=?";
 		int num = 0;
 		try {
-			num = runner.update(sql, null, user.getUsername(), user.getPassword(), user.getAutograph(),
+			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
 					user.getRegistertime());// 执行插入语句
 			// 在个人信息表中同步增加该用户的昵称信息
 			runner.update("insert into selfinfo_tb set userid=?,nikename=?", user.getUserId(), user.getNikename());
