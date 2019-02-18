@@ -9,6 +9,8 @@ import java.util.Date;
 public class User {
 	private int userId;// 用户id
 	private String username;// 用户名
+	private String phone;// 电话
+	private String email;// 邮箱
 	private String password;// 用户密码
 	private String autograph;// 签名
 	private Date registertime;// 注册时间
@@ -20,7 +22,7 @@ public class User {
 	private double integral;// 积分
 	private String sendList;// 发布列表
 	private String accept;// 接受列表
-	private String colection;// 收藏列表
+	private String collection;// 收藏列表
 	private String finish;// 完成列表
 	private String offtenTask;// 常接任务列表
 	private String nikename;// 昵称
@@ -38,6 +40,22 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getCredit() {
@@ -120,7 +138,6 @@ public class User {
 		this.fans = fans;
 	}
 
-
 	public String getSendList() {
 		return sendList;
 	}
@@ -137,12 +154,12 @@ public class User {
 		this.accept = accept;
 	}
 
-	public String getColection() {
-		return colection;
+	public String getCollection() {
+		return collection;
 	}
 
-	public void setColection(String colection) {
-		this.colection = colection;
+	public void setCollection(String collection) {
+		this.collection = collection;
 	}
 
 	public String getFinish() {
@@ -160,7 +177,6 @@ public class User {
 	public void setOfftenTask(String offtenTask) {
 		this.offtenTask = offtenTask;
 	}
-	
 
 	public String getNikename() {
 		return nikename;
@@ -193,9 +209,9 @@ public class User {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "userId:"+userId+",photo:"+photo;
+		return "userId:" + userId + ",photo:" + photo;
 	}
 }

@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			num = runner.update(sql, user.getUserId(), user.getUsername(), user.getPassword(), user.getAutograph(),
 					user.getRegistertime(), user.getFollow(), user.getFans(), user.getSendList(), user.getAccept(),
-					user.getColection(), user.getFinish(), user.getOfftenTask());// 执行插入语句
+					user.getCollection(), user.getFinish(), user.getOfftenTask());// 执行插入语句
 			// 在个人信息表中同步增加该用户的昵称信息
 			runner.update("insert into selfinfo_tb values(?,?,?,?,?)", user.getUserId(), user.getNikename(),
 					user.getPhoto(), user.getSex(), user.getLocation());
