@@ -12,7 +12,8 @@ import java.util.List;
 public class Task {
 	private int taskId;// 任务id
 	private int userId;// 发布此任务的用户
-	private int type;// 任务类型
+	private int type;// 任务分类
+	private int tasklabel;// 任务标签
 	private int state;// 任务状态
 	private int remunertype;// 酬劳类型
 	private double remuneration;// 酬劳
@@ -20,7 +21,7 @@ public class Task {
 	private String taskName;// 任务名字
 	private String taskDesc;// 任务描述
 	private String loc;// 任务地点
-	private List<Comment> commentList;// 评论列表
+	private String commentList;// 评论列表
 	private int upCount;// 点赞数
 	private int collecCount;// 收藏数
 	private int clickCount;// 点击数
@@ -143,11 +144,11 @@ public class Task {
 		this.taskPhoto = taskPhoto;
 	}
 
-	public List<Comment> getCommentList() {
+	public String getCommentList() {
 		return commentList;
 	}
 
-	public void setCommentList(List<Comment> commentList) {
+	public void setCommentList(String commentList) {
 		this.commentList = commentList;
 	}
 
@@ -159,17 +160,26 @@ public class Task {
 		this.startTime = startTime;
 	}
 
-/*	@Override
-	public String toString() {
-		return "taskId:" + taskId + "userId:" + userId + "type:" + type + "state:" + state + "remunertype:"
-				+ remunertype + "remuneration:" + remuneration + "timelimit:" + timelimit + "taskName:" + taskName
-				+ "taskDesc:" + taskDesc + "loc:" + loc + "commentList:" + commentList + "upCount:" + upCount
-				+ "collecCount:" + collecCount + "clickCount:" + clickCount + "taskPhoto:" + taskPhoto + "startTime:"
-				+ startTime;
-	}*/
+	/*
+	 * @Override public String toString() { return "taskId:" + taskId + "userId:" +
+	 * userId + "type:" + type + "state:" + state + "remunertype:" + remunertype +
+	 * "remuneration:" + remuneration + "timelimit:" + timelimit + "taskName:" +
+	 * taskName + "taskDesc:" + taskDesc + "loc:" + loc + "commentList:" +
+	 * commentList + "upCount:" + upCount + "collecCount:" + collecCount +
+	 * "clickCount:" + clickCount + "taskPhoto:" + taskPhoto + "startTime:" +
+	 * startTime; }
+	 */
 	@Override
 	public String toString() {
-		return "taskId:"+taskId+",userId:"+userId;
+		return "taskId:" + taskId + ",userId:" + userId;
+	}
+
+	public int getTasklabel() {
+		return tasklabel;
+	}
+
+	public void setTasklabel(int tasklabel) {
+		this.tasklabel = tasklabel;
 	}
 
 }
