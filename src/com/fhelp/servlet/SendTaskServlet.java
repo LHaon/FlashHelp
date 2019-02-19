@@ -33,7 +33,7 @@ public class SendTaskServlet extends HttpServlet {
 		// 任务类型 1现金 2积分 3无偿
 		int type = Integer.parseInt(request.getParameter("taskType"));
 		task.setType(type);
-		task.setTasklabel(Integer.parseInt(request.getParameter("taskLabel")));
+		task.setTasklabel(request.getParameter("taskLabel"));
 		// task.setTaskPhoto(request.getParameter("taskPhoto"));
 		// 任务状态 1表示刚发布未接取，2表示进行中 ，3表示已完成
 		task.setState(1);

@@ -13,7 +13,7 @@ public class Task {
 	private int taskId;// 任务id
 	private int userId;// 发布此任务的用户
 	private int type;// 任务分类
-	private int tasklabel;// 任务标签
+	private String tasklabel;// 任务标签
 	private int state;// 任务状态
 	private int remunertype;// 酬劳类型
 	private double remuneration;// 酬劳
@@ -174,11 +174,11 @@ public class Task {
 		return "taskId:" + taskId + ",userId:" + userId;
 	}
 
-	public int getTasklabel() {
+	public String getTasklabel() {
 		return tasklabel;
 	}
 
-	public void setTasklabel(int tasklabel) {
+	public void setTasklabel(String tasklabel) {
 		this.tasklabel = tasklabel;
 	}
 
