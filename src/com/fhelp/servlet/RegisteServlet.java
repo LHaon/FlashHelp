@@ -95,7 +95,7 @@ public class RegisteServlet extends HttpServlet {
 			user.setSex(0);
 			user.setLocation("康定");
 			user.setAutograph("这个人很懒，什么都没有留下");
-			base.setData(user);
+			base.setData(user);//
 			// 添加到数据库中
 			service.register(user);
 		}
