@@ -49,7 +49,7 @@ public class SendTaskServlet extends HttpServlet {
 		task.setTaskName(request.getParameter("taskName"));
 		task.setTaskDesc(request.getParameter("taskInfo"));
 		task.setLoc(request.getParameter("taskLocation"));
-		task.setCommentList("0,");
+		task.setCommentList("0");
 		task.setStartTime(new Date(System.currentTimeMillis()));
 		if (service.sendTask(task)) {
 			base.setCode(200);
